@@ -5,8 +5,9 @@ state=`xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$"`
 
 if [ "$state" -eq '1' ];then
   xinput --disable "$device"
-  notify-send "Touchpad Disable"  # notify-send is in package "libnotify-bin"
+  # notify-send is in package "libnotify-bin"
+  notify-send "Toggling Touchpad" "Touchpad Disable"
 else
   xinput --enable "$device"
-  notify-send "Touchpad Enable"
+  notify-send "Toggling Touchpad" "Touchpad Enable"
 fi
