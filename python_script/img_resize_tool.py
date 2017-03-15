@@ -3,6 +3,8 @@ from PIL import Image
 from os.path import splitext
 import sys
 import glob
+def help_info():
+    print("usuage: python3 img_resize_tool.py <target_img> <width> <height>")
 def resizeFactory(x,y,name):
 	im = Image.open(name)
 	nim = im.resize((x,y), Image.BILINEAR)
@@ -10,9 +12,13 @@ def resizeFactory(x,y,name):
 	nim.save(new+".png","PNG")
 def main():
     if ( len(sys.argv) > 1 ):
-        name = sys.argv[1]
-        x = sys.argv[2]
-        y = sys.argv[3]
+        if ( sys.argv[1] == 'help' or sys.argv[1] == '-h' ):
+            help_info()
+            return
+        else:
+            name = sys.argv[1]
+            x = sys.argv[2]
+            y = sys.argv[3]
     else:
 	    name = input("Enter File name:")
 	    x = input("weight:")
