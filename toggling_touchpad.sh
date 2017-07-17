@@ -1,13 +1,13 @@
 #!/bin/bash
+# This script will only work in gnome desktop enviroment
 
-device="ELAN1010:00 04F3:3012 Touchpad" # your touchpad id in xinput ( use `xinput list` to check id ) 
-state=`xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$"`
+state=`gsettings get org.gnome.desktop.peripherals.touchpad send-events`
 
-if [ "$state" -eq '1' ];then
-  xinput --disable "$device"
+if [[ $state == "'disabled'" ]];then  
+  gsettings set org.gnome.desktop.peripherals.touchpad send-events 'enabled'
   # notify-send is in package "libnotify-bin"
-  notify-send "Toggling Touchpad" "Touchpad Disable"
+  notify-send "Toggling Touchpad" "Touchpad Enabled"
 else
-  xinput --enable "$device"
-  notify-send "Toggling Touchpad" "Touchpad Enable"
+  gsettings set org.gnome.desktop.peripherals.touchpad send-events 'disabled'
+  notify-send "Toggling Touchpad" "Touchpad Disabled"
 fi
