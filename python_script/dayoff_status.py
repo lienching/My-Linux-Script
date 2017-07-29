@@ -6,6 +6,7 @@ if not sys.version_info[0]==3:
     exit(1)
 
 from urllib.request import urlopen
+import ssl
 import lxml.html
 
 BASE_URL="http://www.dgpa.gov.tw"
@@ -14,7 +15,10 @@ PAGE_URL="/nds.html"
 def main():
     html_string=''
     try:
-        response=urlopen("http://www.dgpa.gov.tw/nds.html")
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        response=urlopen("https://www.dgpa.gov.tw", context=ctx)
         if 'text/html' in response.getheader('Content-Type'):
             html_bytes = response.read()
             html_string = html_bytes.decode("utf-8")
