@@ -14,6 +14,7 @@ PAGE_URL="/nds.html"
 
 def main():
     html_string=''
+    print("Connecting...")
     try:
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
