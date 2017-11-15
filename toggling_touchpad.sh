@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # This script will only work in gnome desktop enviroment
 
 state=`gsettings get org.gnome.desktop.peripherals.touchpad send-events`
